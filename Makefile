@@ -3,12 +3,14 @@ VERSION ?= missing
 container = uuid-server
 image = viniciusban/uuid-server
 
-.PHONY: help, build, latest, run, stop
+.PHONY: help, build, latest, run, runimage, stop
 
 help:
 	@echo 'Usage:'
-	@echo '  Run container using image VERSION and current source code with auto-reload enabled.'
+	@echo "  Run container for development. Current source code (not image's) with auto-reload enabled."
 	@echo '    $$ make run VERSION=latest'
+	@echo '  Run container using image VERSION.'
+	@echo '    $$ make runimage VERSION=latest'
 	@echo '  Stop'
 	@echo '    $$ make stop'
 	@echo '  Build image VERSION'
@@ -32,6 +34,11 @@ run:
 		-v ${PWD}/app:/code/app \
 		${image}:${VERSION} \
 		fastapi run --reload app/main.py --port 80
+
+runimage:
+	docker container run --rm --name ${container} \
+		-p 8080:80 \
+		${image}:${VERSION}
 
 stop:
 	docker container stop ${container}
