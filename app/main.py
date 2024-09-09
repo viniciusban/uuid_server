@@ -1,5 +1,7 @@
 import datetime
+import random
 import socket
+import time
 import uuid
 
 from typing import Union
@@ -21,6 +23,11 @@ class HealthCheckResponse(BaseModel):
 
 class UuidResponse(BaseModel):
     uuid: str
+
+
+class UuidResponseSlow(BaseModel):
+    uuid: str
+    wait_time: int
 
 
 app = FastAPI()
@@ -46,3 +53,13 @@ def health_check() -> HealthCheckResponse:
 @app.get("/uuids/new")
 def create_uuid() -> UuidResponse:
     return UuidResponse(uuid=str(uuid.uuid4()))
+
+
+@app.get("/uuids/newslow")
+def create_uuid_slow() -> UuidResponseSlow:
+    seconds = random.randint(0, 5) + 1
+    time.sleep(seconds)
+    return UuidResponseSlow(
+        uuid=str(uuid.uuid4()),
+        wait_time=seconds
+    )
