@@ -1,5 +1,6 @@
 FROM python:3.11-alpine
 
+ENV PYTHONDONTWRITEBYTECODE=1
 WORKDIR /code
 
 COPY ./requirements.txt /code/requirements.txt
