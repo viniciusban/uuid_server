@@ -21,7 +21,7 @@ help:
 	@echo '  Patch version: YYMMDD.P - 240831.1'
 
 build:
-	docker image build -t ${image}:${VERSION} .
+	docker image build --no-cache -t ${image}:${VERSION} .
 
 latest:
 	docker image tag ${image}:${VERSION} ${image}:latest
