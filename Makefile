@@ -17,6 +17,7 @@ help:
 	@echo '    $$ make build VERSION=1.1.0'
 
 build:
+	@if [ "${VERSION}" = "missing" ]; then (echo "Missing VERSION"; exit 1); fi
 	docker image build --no-cache -t ${image}:${VERSION} .
 
 dev:
