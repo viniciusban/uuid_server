@@ -3,7 +3,7 @@ VERSION ?= missing
 container = uuid-server
 image = viniciusban/uuid-server
 
-.PHONY: help, build, latest, run, runimage, stop
+.PHONY: help, build, run, runimage, stop
 
 help:
 	@echo 'Usage:'
@@ -15,8 +15,6 @@ help:
 	@echo '    $$ make stop'
 	@echo '  Build image VERSION'
 	@echo '    $$ make build VERSION=240831'
-	@echo '  Tag image VERSION as latest'
-	@echo '    $$ make latest VERSION=240831'
 	@echo ' '
 	@echo 'Version format:'
 	@echo '  Regular version: YYMMDD - 240831'
@@ -24,9 +22,6 @@ help:
 
 build:
 	docker image build --no-cache -t ${image}:${VERSION} .
-
-latest:
-	docker image tag ${image}:${VERSION} ${image}:latest
 
 run:
 	docker container run --rm --name ${container} \
