@@ -3,12 +3,12 @@ VERSION ?= missing
 container = uuid-server
 image = viniciusban/uuid-server
 
-.PHONY: help, build, run, runimage, stop
+.PHONY: help, build, dev, runimage, stop
 
 help:
 	@echo 'Usage:'
 	@echo "  Run container for development. Current source code (not image's) with auto-reload enabled."
-	@echo '    $$ make run VERSION=latest'
+	@echo '    $$ make dev VERSION=latest'
 	@echo '  Run container using image VERSION.'
 	@echo '    $$ make runimage VERSION=latest'
 	@echo '  Stop'
@@ -23,7 +23,7 @@ help:
 build:
 	docker image build --no-cache -t ${image}:${VERSION} .
 
-run:
+dev:
 	docker container run --rm --name ${container} \
 		-p 8080:80 \
 		-v ${PWD}/app:/code/app \
