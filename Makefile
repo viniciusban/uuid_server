@@ -8,17 +8,13 @@ image = viniciusban/uuid-server
 help:
 	@echo 'Usage:'
 	@echo "  Run container for development. Current source code (not image's) with auto-reload enabled."
-	@echo '    $$ make dev VERSION=latest'
+	@echo '    $$ make dev VERSION=1.0.0'
 	@echo '  Run container using image VERSION.'
-	@echo '    $$ make runimage VERSION=latest'
+	@echo '    $$ make runimage VERSION=1.0.0'
 	@echo '  Stop'
 	@echo '    $$ make stop'
 	@echo '  Build image VERSION'
-	@echo '    $$ make build VERSION=240831'
-	@echo ' '
-	@echo 'Version format:'
-	@echo '  Regular version: YYMMDD - 240831'
-	@echo '  Patch version: YYMMDD.P - 240831.1'
+	@echo '    $$ make build VERSION=1.1.0'
 
 build:
 	docker image build --no-cache -t ${image}:${VERSION} .
